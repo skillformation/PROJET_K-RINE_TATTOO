@@ -70,7 +70,7 @@
                         <div class="showcase-grid">
                             <div class="showcase-item">
                                 <div class="showcase-image">
-                                    <img src="{{ asset('storage/portfolio/image1.png') }}" alt="Fleur Minimaliste">
+                                    <img src="{{ asset('storage/assets/images/portfolio/image1.png') }}" alt="Fleur Minimaliste">
                                     <div class="showcase-overlay">
                                         <span class="showcase-tag">Minimaliste</span>
                                     </div>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="showcase-item">
                                 <div class="showcase-image">
-                                    <img src="{{ asset('storage/portfolio/image3.png') }}" alt="Rose Line-Art">
+                                    <img src="{{ asset('storage/assets/images/portfolio/image3.png') }}" alt="Rose Line-Art">
                                     <div class="showcase-overlay">
                                         <span class="showcase-tag">Line-Art</span>
                                     </div>
