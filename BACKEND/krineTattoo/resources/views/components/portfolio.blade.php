@@ -32,7 +32,7 @@
             @else
                 <div class="portfolio-item" data-category="minimaliste">
                     <div class="portfolio-image">
-                        <img src="assets/images/portfolio/image1.png" alt="Fleur Minimaliste">
+                        <img src="{{ asset('storage/assets/images/portfolio/image1.png') }}" alt="Fleur Minimaliste">
                         <div class="portfolio-overlay">
                             <i data-lucide="zoom-in" class="view-icon"></i>
                         </div>
@@ -50,7 +50,7 @@
 
                 <div class="portfolio-item" data-category="minimaliste">
                     <div class="portfolio-image">
-                        <img src="assets/images/portfolio/image2.png" alt="Cœurs Brodés">
+                        <img src="{{ asset('storage/assets/images/portfolio/image2.png') }}" alt="Cœurs Brodés">
                         <div class="portfolio-overlay">
                             <i data-lucide="zoom-in" class="view-icon"></i>
                         </div>
@@ -68,7 +68,7 @@
 
                 <div class="portfolio-item" data-category="line-art">
                     <div class="portfolio-image">
-                        <img src="assets/images/portfolio/image3.png" alt="Branche Feuillue">
+                        <img src="{{ asset('storage/assets/images/portfolio/image3.png') }}" alt="Branche Feuillue">
                         <div class="portfolio-overlay">
                             <i data-lucide="zoom-in" class="view-icon"></i>
                         </div>
@@ -86,7 +86,7 @@
 
                 <div class="portfolio-item" data-category="aquarelle">
                     <div class="portfolio-image">
-                        <img src="assets/images/portfolio/image4.png" alt="Phénix Couleur">
+                        <img src="{{ asset('storage/assets/images/portfolio/image4.png') }}" alt="Phénix Couleur">
                         <div class="portfolio-overlay">
                             <i data-lucide="zoom-in" class="view-icon"></i>
                         </div>
@@ -104,7 +104,7 @@
 
                 <div class="portfolio-item" data-category="line-art">
                     <div class="portfolio-image">
-                        <img src="assets/images/portfolio/image5.png" alt="Rose Nuque">
+                        <img src="{{ asset('storage/assets/images/portfolio/image5.png') }}" alt="Rose Nuque">
                         <div class="portfolio-overlay">
                             <i data-lucide="zoom-in" class="view-icon"></i>
                         </div>
@@ -122,7 +122,7 @@
 
                 <div class="portfolio-item" data-category="realistic">
                     <div class="portfolio-image">
-                        <img src="assets/images/portfolio/image6.png" alt="Portrait Féminin">
+                        <img src="{{ asset('storage/assets/images/portfolio/image6.png') }}" alt="Portrait Féminin">
                         <div class="portfolio-overlay">
                             <i data-lucide="zoom-in" class="view-icon"></i>
                         </div>

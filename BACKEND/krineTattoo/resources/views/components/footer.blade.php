@@ -9,7 +9,7 @@
                     {!! $footerBrand !!}
                 @else
                     <div class="footer-logo">
-                        <img src="assets/images/logo.png" alt="K'RINE TATTOO">
+                        <img src="{{ asset('storage/assets/images/logo.png') }}" alt="K'RINE TATTOO">
                         <div>
                             <h3>K'RINE</h3>
                             <p>TATTOO</p>

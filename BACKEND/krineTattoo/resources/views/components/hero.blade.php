@@ -49,7 +49,7 @@
                     {!! $heroImage !!}
                 @else
                     <div class="image-container">
-                        <img src="assets/images/artiste.png" alt="Artiste tatoueur au travail" class="featured-img">
+                        <img src="{{ asset('storage/assets/images/artiste.png') }}" alt="Artiste tatoueur au travail" class="featured-img">
                     </div>
                     <div class="decorative-box decorative-box-1"></div>
                     <div class="decorative-box decorative-box-2"></div>
