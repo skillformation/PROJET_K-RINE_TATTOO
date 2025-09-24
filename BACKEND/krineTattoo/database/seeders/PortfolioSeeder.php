@@ -16,7 +16,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Fleur Minimaliste',
             'description' => 'Tatouage floral line-art délicat',
-            'image' => 'portfolio/image1.png',
+            'image' => 'assets/images/assets/images/portfolio/image1.png',
             'category' => 'minimaliste',
             'tag' => 'Minimaliste',
             'duration' => '3 heures',
@@ -28,7 +28,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Cœurs Brodés',
             'description' => 'Tatouages assortis style broderie vintage',
-            'image' => 'portfolio/image2.png',
+            'image' => 'assets/images/assets/images/portfolio/image2.png',
             'category' => 'minimaliste',
             'tag' => 'Minimaliste',
             'duration' => '2 heures',
@@ -40,7 +40,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Branche Feuillue',
             'description' => 'Line-art botanique épuré et délicat',
-            'image' => 'portfolio/image3.png',
+            'image' => 'assets/images/portfolio/image3.png',
             'category' => 'line-art',
             'tag' => 'Line-art',
             'duration' => '4 heures',
@@ -52,7 +52,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Phénix Couleur',
             'description' => 'Tatouage coloré avec dégradés vibrants',
-            'image' => 'portfolio/image4.png',
+            'image' => 'assets/images/portfolio/image4.png',
             'category' => 'aquarelle',
             'tag' => 'Couleur',
             'duration' => '8 heures',
@@ -64,7 +64,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Rose Nuque',
             'description' => 'Tatouage délicat line-art rouge',
-            'image' => 'portfolio/image5.png',
+            'image' => 'assets/images/portfolio/image5.png',
             'category' => 'line-art',
             'tag' => 'Line-art',
             'duration' => '2 heures',
@@ -76,7 +76,7 @@ class PortfolioSeeder extends Seeder
         Portfolio::create([
             'title' => 'Portrait Féminin',
             'description' => 'Portrait réaliste avec éléments géométriques',
-            'image' => 'portfolio/image6.png',
+            'image' => 'assets/images/portfolio/image6.png',
             'category' => 'realistic',
             'tag' => 'Réaliste',
             'duration' => '6 heures',
