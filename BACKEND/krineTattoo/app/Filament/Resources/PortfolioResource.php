@@ -36,7 +36,20 @@ class PortfolioResource extends Resource
                 Components\FileUpload::make('image')
                     ->image()
                     ->directory('assets/images/portfolio')
-                    ->disk('public'),
+                    ->disk('public')
+                    ->maxSize(1024) // 1MB max pour améliorer les performances
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth(800) // Taille réduite
+                    ->imageResizeTargetHeight(600) // Taille réduite
+                    ->imagePreviewHeight(150) // Preview plus grande
+                    ->panelLayout('integrated') // Layout intégré pour meilleur rendu
+                    ->uploadingMessage('Upload en cours...')
+                    ->imageEditor() // Éditeur d'image intégré
+                    ->imageCropAspectRatio('16:9') // Ratio fixe
+                    ->helperText('Max 1MB - JPEG, PNG ou WebP recommandés')
+                    ->live() // Mise à jour en temps réel
+                    ->columnSpanFull(),
                 Components\Select::make('category')
                     ->options([
                         'realistic' => 'Réaliste',

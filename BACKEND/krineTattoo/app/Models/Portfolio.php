@@ -18,6 +18,29 @@ class Portfolio extends Model
         'sort_order',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($portfolio) {
+            // Générer automatiquement le tag basé sur la catégorie si non fourni
+            if (empty($portfolio->tag)) {
+                $portfolio->tag = match($portfolio->category) {
+                    'realistic' => 'Réaliste',
+                    'minimaliste' => 'Minimaliste',
+                    'line-art' => 'Line-art',
+                    'aquarelle' => 'Couleur',
+                    default => ucfirst($portfolio->category)
+                };
+            }
+            
+            // Assurer que sort_order a une valeur par défaut si non fournie
+            if (is_null($portfolio->sort_order)) {
+                $portfolio->sort_order = 0;
+            }
+        });
+    }
+
     protected $casts = [
         'is_active' => 'boolean',
     ];

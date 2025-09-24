@@ -32,7 +32,12 @@
             @else
                 @php
                     $portfolios = \App\Models\Portfolio::active()->ordered()->get();
+                    // Debug: Afficher le nombre de portfolios trouvés
+                    // dd($portfolios->count(), $portfolios->pluck(['id', 'title', 'image'])->toArray());
                 @endphp
+                
+                {{-- Debug temporaire : Nombre de portfolios --}}
+                <!-- Total portfolios actifs: {{ $portfolios->count() }} -->
                 
                 @foreach($portfolios as $portfolio)
                     <div class="portfolio-item" data-category="{{ $portfolio->category }}">
