@@ -23,17 +23,26 @@ class PortfolioResource extends Resource
     protected static ?string $model = Portfolio::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+    
+    protected static ?string $navigationLabel = 'Portfolios';
+    
+    protected static ?string $modelLabel = 'Portfolio';
+    
+    protected static ?string $pluralModelLabel = 'Portfolios';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->schema([
                 Components\TextInput::make('title')
+                    ->label('Titre')
                     ->required()
                     ->maxLength(255),
                 Components\Textarea::make('description')
+                    ->label('Description')
                     ->columnSpanFull(),
                 Components\FileUpload::make('image')
+                    ->label('Image')
                     ->image()
                     ->directory('assets/images/portfolio')
                     ->disk('public')
@@ -51,6 +60,7 @@ class PortfolioResource extends Resource
                     ->live() // Mise à jour en temps réel
                     ->columnSpanFull(),
                 Components\Select::make('category')
+                    ->label('Catégorie')
                     ->options([
                         'realistic' => 'Réaliste',
                         'minimaliste' => 'Minimaliste',
@@ -84,15 +94,24 @@ class PortfolioResource extends Resource
                     ->disk('public')
                     ->size(60),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Titre')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('category')
+                    ->label('Catégorie')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'realistic' => 'danger',
                         'minimaliste' => 'success',
                         'line-art' => 'info',
                         'aquarelle' => 'warning',
+                    })
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'realistic' => 'Réaliste',
+                        'minimaliste' => 'Minimaliste',
+                        'line-art' => 'Line-art',
+                        'aquarelle' => 'Couleur',
+                        default => ucfirst($state)
                     }),
                 Tables\Columns\TextColumn::make('duration')
                     ->label('Durée'),
@@ -105,16 +124,19 @@ class PortfolioResource extends Resource
                     ->label('Ordre')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Créé le')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Modifié le')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')
+                    ->label('Catégorie')
                     ->options([
                         'realistic' => 'Réaliste',
                         'minimaliste' => 'Minimaliste', 
