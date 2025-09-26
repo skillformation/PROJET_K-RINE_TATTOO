@@ -32,76 +32,100 @@
                     @isset($contactForm)
                         {!! $contactForm !!}
                     @else
-                        <form class="contact-form" id="contactForm">
+                        <!-- Messages de succès/erreur -->
+                        @if(session('success'))
+                            <div class="alert alert-success" style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-error" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        @if($errors->any())
+                            <div class="alert alert-error" style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form class="contact-form" id="contactForm" action="/demande-rendez-vous" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Prénom *</label>
-                                    <input type="text" placeholder="Votre prénom" required>
+                                    <input type="text" name="prenom" placeholder="Votre prénom" value="{{ old('prenom') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Nom *</label>
-                                    <input type="text" placeholder="Votre nom" required>
+                                    <input type="text" name="nom" placeholder="Votre nom" value="{{ old('nom') }}" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Email *</label>
-                                <input type="email" placeholder="votre@email.fr" required>
+                                <input type="email" name="email" placeholder="votre@email.fr" value="{{ old('email') }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label>Téléphone</label>
-                                <input type="tel" placeholder="+596 696 00 44 21">
+                                <input type="tel" name="telephone" placeholder="+596 696 00 44 21" value="{{ old('telephone') }}">
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Style souhaité</label>
-                                    <select>
-                                        <option>Sélectionner un style</option>
-                                        <option>Réaliste</option>
-                                        <option>Géométrique</option>
-                                        <option>Traditionnel</option>
-                                        <option>Cover-up</option>
-                                        <option>Autre</option>
+                                    <select name="style">
+                                        <option value="">Sélectionner un style</option>
+                                        <option value="realiste">Réaliste</option>
+                                        <option value="geometrique">Géométrique</option>
+                                        <option value="traditionnel">Traditionnel</option>
+                                        <option value="cover-up">Cover-up</option>
+                                        <option value="autre">Autre</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Zone du corps</label>
-                                    <select>
-                                        <option>Sélectionner une zone</option>
-                                        <option>Bras</option>
-                                        <option>Avant-bras</option>
-                                        <option>Épaule</option>
-                                        <option>Dos</option>
-                                        <option>Poitrine</option>
-                                        <option>Jambe</option>
-                                        <option>Autre</option>
+                                    <select name="zone">
+                                        <option value="">Sélectionner une zone</option>
+                                        <option value="bras">Bras</option>
+                                        <option value="avant-bras">Avant-bras</option>
+                                        <option value="epaule">Épaule</option>
+                                        <option value="dos">Dos</option>
+                                        <option value="poitrine">Poitrine</option>
+                                        <option value="jambe">Jambe</option>
+                                        <option value="autre">Autre</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Taille du tatouage</label>
-                                <select>
-                                    <option>Sélectionner une taille</option>
-                                    <option>Petit (moins de 5 cm)</option>
-                                    <option>Moyen (5-10 cm)</option>
-                                    <option>Grand (10-20 cm)</option>
-                                    <option>Très grand (plus de 20 cm)</option>
-                                    <option>Pièce sur mesure</option>
+                                <select name="taille">
+                                    <option value="">Sélectionner une taille</option>
+                                    <option value="petit">Petit (moins de 5 cm)</option>
+                                    <option value="moyen">Moyen (5-10 cm)</option>
+                                    <option value="grand">Grand (10-20 cm)</option>
+                                    <option value="tres-grand">Très grand (plus de 20 cm)</option>
+                                    <option value="sur-mesure">Pièce sur mesure</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label>Description de votre projet *</label>
-                                <textarea placeholder="Décrivez-moi votre idée de tatouage, vos inspirations, la taille souhaitée..." required></textarea>
+                                <textarea name="description" placeholder="Décrivez-moi votre idée de tatouage, vos inspirations, la taille souhaitée..." required>{{ old('description') }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>Images de référence (optionnel)</label>
                                 <div class="file-upload-container">
-                                    <input type="file" id="fileUpload" name="files" multiple accept="image/*,.pdf" class="file-input">
+                                    <input type="file" id="fileUpload" name="files[]" multiple accept="image/*,.pdf" class="file-input">
                                     <label for="fileUpload" class="file-upload-label">
                                         <i data-lucide="upload" class="icon-md"></i>
                                         <span>Cliquez pour ajouter des images</span>
@@ -111,7 +135,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-full">
+                            <button type="button" onclick="envoyerFormulaire()" class="btn btn-primary btn-full">
                                 Envoyer ma Demande
                             </button>
 
@@ -122,6 +146,30 @@
                     @endisset
                 </div>
             </div>
+
+            <script>
+            function envoyerFormulaire() {
+                // Récupérer les données du formulaire
+                const form = document.getElementById('contactForm');
+                const formData = new FormData(form);
+                
+                // Envoyer les données en arrière-plan sans feedback visuel
+                fetch('/demande-rendez-vous', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => {
+                    // Email envoyé silencieusement en arrière-plan
+                })
+                .catch(error => {
+                    // Erreur silencieuse également
+                    console.error('Erreur:', error);
+                });
+            }
+            </script>
 
             <!-- Info Contact & Horaires -->
             <div class="contact-info-container">

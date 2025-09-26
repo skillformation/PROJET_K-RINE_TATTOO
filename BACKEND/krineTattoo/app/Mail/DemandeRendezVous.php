@@ -13,24 +13,30 @@ class DemandeRendezVous extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $prenom;
     public $nom;
     public $email;
     public $telephone;
-    public $projet;
-    public $datePreferee;
-    public $message;
+    public $style;
+    public $zone;
+    public $taille;
+    public $description;
+    public $files;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($nom, $email, $telephone, $projet, $datePreferee = null, $message = null)
+    public function __construct($prenom, $nom, $email, $telephone = null, $style = null, $zone = null, $taille = null, $description = null, $files = null)
     {
+        $this->prenom = $prenom;
         $this->nom = $nom;
         $this->email = $email;
         $this->telephone = $telephone;
-        $this->projet = $projet;
-        $this->datePreferee = $datePreferee;
-        $this->message = $message;
+        $this->style = $style;
+        $this->zone = $zone;
+        $this->taille = $taille;
+        $this->description = $description;
+        $this->files = $files;
     }
 
     /**
