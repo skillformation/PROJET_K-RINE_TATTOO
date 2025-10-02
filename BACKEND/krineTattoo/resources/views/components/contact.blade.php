@@ -55,7 +55,7 @@
                             </div>
                         @endif
 
-                        <form class="contact-form" id="contactForm" action="/demande-rendez-vous" method="POST" enctype="multipart/form-data">
+                        <form class="contact-form" action="/demande-rendez-vous" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group">
@@ -124,18 +124,11 @@
 
                             <div class="form-group">
                                 <label>Images de référence (optionnel)</label>
-                                <div class="file-upload-container">
-                                    <input type="file" id="fileUpload" name="files[]" multiple accept="image/*,.pdf" class="file-input">
-                                    <label for="fileUpload" class="file-upload-label">
-                                        <i data-lucide="upload" class="icon-md"></i>
-                                        <span>Cliquez pour ajouter des images</span>
-                                        <small>PNG, JPG, PDF - Max 5MB par fichier</small>
-                                    </label>
-                                    <div class="file-list" id="fileList"></div>
-                                </div>
+                                <input type="file" name="files[]" multiple accept=".png,.jpg,.jpeg,.webp">
+                                <small>PNG, JPG, WEBP - Max 10MB par fichier</small>
                             </div>
 
-                            <button type="button" onclick="envoyerFormulaire()" class="btn btn-primary btn-full">
+                            <button type="submit" class="btn btn-primary btn-full">
                                 Envoyer ma Demande
                             </button>
 
@@ -147,29 +140,6 @@
                 </div>
             </div>
 
-            <script>
-            function envoyerFormulaire() {
-                // Récupérer les données du formulaire
-                const form = document.getElementById('contactForm');
-                const formData = new FormData(form);
-                
-                // Envoyer les données en arrière-plan sans feedback visuel
-                fetch('/demande-rendez-vous', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => {
-                    // Email envoyé silencieusement en arrière-plan
-                })
-                .catch(error => {
-                    // Erreur silencieuse également
-                    console.error('Erreur:', error);
-                });
-            }
-            </script>
 
             <!-- Info Contact & Horaires -->
             <div class="contact-info-container">

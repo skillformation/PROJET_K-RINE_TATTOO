@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
 
 class DemandeRendezVous extends Mailable
@@ -22,11 +23,13 @@ class DemandeRendezVous extends Mailable
     public $taille;
     public $description;
     public $files;
+    public $images;
+    public $fileAttachments = [];
 
     /**
      * Create a new message instance.
      */
-    public function __construct($prenom, $nom, $email, $telephone = null, $style = null, $zone = null, $taille = null, $description = null, $files = null)
+    public function __construct($prenom, $nom, $email, $telephone = null, $style = null, $zone = null, $taille = null, $description = null, $files = null, $images = [], $fileAttachments = [])
     {
         $this->prenom = $prenom;
         $this->nom = $nom;
@@ -37,6 +40,8 @@ class DemandeRendezVous extends Mailable
         $this->taille = $taille;
         $this->description = $description;
         $this->files = $files;
+        $this->images = $images;
+        $this->fileAttachments = $fileAttachments;
     }
 
     /**
@@ -52,11 +57,51 @@ class DemandeRendezVous extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    // public function content(): Content
+    // {
+    //     return new Content(
+    //         view: 'emails.demande-rendez-vous',
+    //     );
+    // }
+
+    /**
+     * Build the message.
+     */
+    public function build()
     {
-        return new Content(
-            view: 'emails.demande-rendez-vous',
-        );
+        $message = $this->view('emails.demande-rendez-vous')
+                        ->subject('Nouvelle demande de rendez-vous - K\'RINE TATTOO');
+
+        // Attacher les images avec CID pour affichage inline
+        foreach ($this->images as $index => $image) {
+            if (str_starts_with($image['mime'], 'image/')) {
+                $cid = 'image_' . $index;
+                $message->attachData(
+                    $image['data'],
+                    $image['name'],
+                    [
+                        'mime' => $image['mime'],
+                        'cid' => $cid
+                    ]
+                );
+                
+                // Ajouter le CID à l'image pour le template
+                $this->images[$index]['cid'] = $cid;
+            }
+        }
+
+        // Attacher AUSSI tous les fichiers comme pièces jointes téléchargeables
+        foreach ($this->fileAttachments as $attachment) {
+            $message->attachData(
+                $attachment['data'],
+                $attachment['name'],
+                [
+                    'mime' => $attachment['mime']
+                ]
+            );
+        }
+
+        return $message;
     }
 
     /**
@@ -66,6 +111,7 @@ class DemandeRendezVous extends Mailable
      */
     public function attachments(): array
     {
+        // Laisser vide car on gère tout dans build()
         return [];
     }
 }
